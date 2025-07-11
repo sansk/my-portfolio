@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowRight, Github, BookOpen } from 'lucide-react';
+import { Calendar, ArrowRight, Github, BookOpen, ExternalLink } from 'lucide-react';
 
 const BlogSection = () => {
     const blogPosts = [
@@ -95,10 +95,9 @@ const BlogSection = () => {
                                     <motion.button
                                         whileHover={{ scale: 1.1, rotate: 5 }}
                                         whileTap={{ scale: 0.9 }}
-                                        className="px-6 py-3 bg-primary/90 text-white rounded-full font-medium flex items-center space-x-2 backdrop-blur-sm border border-primary/30 hover:bg-primary transition-colors"
+                                        className="p-3 bg-white/20 rounded-full backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-colors"
                                     >
-                                        <span>Read More</span>
-                                        <ArrowRight className="w-4 h-4" />
+                                        <ExternalLink className="w-6 h-6 text-white" />
                                     </motion.button>
                                 </motion.div>
                             </div>
@@ -133,7 +132,8 @@ const BlogSection = () => {
                         className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-primary-foreground border-2 border-primary bg-[hsl(var(--primary))]"
                     >
                         <BookOpen className="w-5 h-5 mr-2" />
-                        <span>Visit My Blog</span>
+                        <span>Read My Blog</span>
+                        <span className="ml-2">→</span>
                     </motion.a>
                 </div>
             </div>

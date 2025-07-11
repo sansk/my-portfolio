@@ -140,7 +140,7 @@ const ContactSection = () => {
                             >
                                 <Button
                                     type="submit"
-                                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-full hover-glow transition-all duration-300"
+                                    className="w-full bg-[hsl(var(--primary))] hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-full hover-glow transition-all duration-300"
                                 >
                                     <Send className="w-4 h-4 mr-2" />
                                     Send Message
