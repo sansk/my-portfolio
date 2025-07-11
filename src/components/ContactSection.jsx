@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import emailjs from 'emailjs-com';
+// import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
     const [formData, setFormData] = useState({

@@ -1,0 +1,102 @@
+/* 3D Icon Effects */
+.skill-3d-container {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.skill-3d-icon {
+    transform-style: preserve-3d;
+}
+
+/* Circular icon styles */
+.skill-3d-icon,
+.skill-3d-glow,
+.skill-3d-shadow,
+.skill-3d-highlight {
+    border-radius: 50%;
+}
+
+/* Floating animation for particles */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+.floating-particle {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* 3D Glow effect */
+.skill-3d-glow {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-3d-container:hover .skill-3d-glow {
+    opacity: 1;
+}
+
+/* 3D Shadow layers */
+.skill-3d-shadow {
+    transform: translateZ(-10px);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.skill-3d-highlight {
+    transform: translateZ(5px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* Embossed effect styles */
+.embossed-icon {
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(0, 0, 0, 0.05) 50%,
+            rgba(255, 255, 255, 0.05) 100%);
+    box-shadow:
+        inset 2px 2px 4px rgba(255, 255, 255, 0.2),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+        4px 4px 8px rgba(0, 0, 0, 0.1),
+        -2px -2px 4px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.embossed-icon::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(0, 0, 0, 0.05) 50%,
+            rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.embossed-icon::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(145deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(0, 0, 0, 0.05) 100%);
+    border-radius: 50%;
+    z-index: -2;
+}

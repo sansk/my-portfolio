@@ -1,9 +1,7 @@
-@tailwind base;
-/* ---break---
-*/
-@custom-variant dark (&:is(.dark *));
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* @custom-variant dark (&:is(.dark *)); */
+
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -98,11 +96,12 @@ All colors MUST be HSL.
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
@@ -220,6 +219,7 @@ All colors MUST be HSL.
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
