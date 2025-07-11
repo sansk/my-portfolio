@@ -15,7 +15,6 @@ import ThemeProvider from '@/components/ThemeProvider';
 const Index = () => {
     // Section refs
     const sectionRefs = [
-        useRef(null), // HeroSection
         useRef(null), // AboutSection
         useRef(null), // SkillsSection
         useRef(null), // ProjectsSection
@@ -28,23 +27,39 @@ const Index = () => {
     const handleNavigate = (index) => {
         const ref = sectionRefs[index]?.current;
         if (ref) {
-            ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const headerHeight = 64; // Approximate header height
+            const elementTop = ref.offsetTop - headerHeight;
+            window.scrollTo({
+                top: elementTop,
+                behavior: 'smooth'
+            });
         }
     };
 
     // Scrollspy: update currentSection based on scroll position
     useEffect(() => {
         const handleScroll = () => {
-            const offsets = sectionRefs.map(ref => ref.current?.getBoundingClientRect().top ?? Infinity);
-            const threshold = 120; // px from top
-            const activeIndex = offsets.findIndex((offset, i) => {
-                if (i === offsets.length - 1) return true;
-                return offset >= -threshold && offset < (offsets[i + 1] ?? Infinity);
+            const scrollPosition = window.scrollY + 100; // Offset for header
+            const offsets = sectionRefs.map((ref, index) => {
+                const element = ref.current;
+                if (!element) return { top: Infinity, index };
+                return { top: element.offsetTop, index };
             });
-            setCurrentSection(activeIndex === -1 ? 0 : activeIndex);
+            
+            // Find the current section - only activate when actually in a section
+            let activeIndex = -1; // -1 means no active section (hero area)
+            for (let i = offsets.length - 1; i >= 0; i--) {
+                if (scrollPosition >= offsets[i].top) {
+                    activeIndex = offsets[i].index;
+                    break;
+                }
+            }
+            
+            setCurrentSection(activeIndex);
         };
+        
         window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
+        handleScroll(); // Initial call
         return () => window.removeEventListener('scroll', handleScroll);
     }, [sectionRefs]);
 
@@ -56,12 +71,12 @@ const Index = () => {
                 <SocialSidebar />
 
                 <main className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 md:pl-20 space-y-24">
-                    <div ref={sectionRefs[0]}><HeroSection /></div>
-                    <div ref={sectionRefs[1]}><AboutSection /></div>
-                    <div ref={sectionRefs[2]}><SkillsSection /></div>
-                    <div ref={sectionRefs[3]}><ProjectsSection /></div>
-                    <div ref={sectionRefs[4]}><BlogSection /></div>
-                    <div ref={sectionRefs[5]}><ContactSection /></div>
+                    <div><HeroSection /></div>
+                    <div ref={sectionRefs[0]}><AboutSection /></div>
+                    <div ref={sectionRefs[1]}><SkillsSection /></div>
+                    <div ref={sectionRefs[2]}><ProjectsSection /></div>
+                    <div ref={sectionRefs[3]}><BlogSection /></div>
+                    <div ref={sectionRefs[4]}><ContactSection /></div>
                 </main>
             </div>
         </ThemeProvider>

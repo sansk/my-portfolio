@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import PlaceholderImg from '../images/placeholder.svg';
 
 const AboutSection = () => {
     return (
@@ -30,7 +31,7 @@ const AboutSection = () => {
                                 transition={{ duration: 4, repeat: Infinity, repeatType: 'loop', ease: 'easeInOut' }}
                             />
                             <img
-                                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=500&fit=crop&crop=face"
+                                src={PlaceholderImg}
                                 alt="About Sangeetha"
                                 className="relative w-80 h-96 rounded-2xl object-cover shadow-2xl"
                             />

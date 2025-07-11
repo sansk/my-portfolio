@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import FloatingShape from './FloatingShape';
 import TypewriterText from './TypewriterText';
 import ResumePDF from '../cv/Sangeetha-K_Resume.pdf';
+import ProfileImg from '../images/Profile.jpg';
 
 // --- Heading Block ---
 const HeroHeading = () => (
@@ -54,7 +55,8 @@ const ResumeButton = () => (
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg rounded-full hover-glow"
+                className="px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg rounded-full hover-glow transition-all duration-300 text-white font-medium shadow-md"
+                style={{ background: 'linear-gradient(135deg, hsl(258 90% 66%), hsl(195 100% 50%))' }}
                 onClick={() => {
                     const link = document.createElement('a');
                     link.href = ResumePDF;
@@ -118,7 +120,7 @@ const HeroSection = () => {
                         >
                             <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 p-4">
                                 <motion.img
-                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                                    src={ProfileImg}
                                     alt="Sangeetha K."
                                     className="w-full h-full rounded-full object-cover"
                                     animate={{

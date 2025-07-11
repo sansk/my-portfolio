@@ -17,11 +17,10 @@ const SocialSidebar = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="fixed left-8 top-1/2 transform -translate-y-1/2 z-50 hidden sm:flex flex-col items-center space-y-6"
-            style={{ top: '45%' }}
+            className="fixed left-8 bottom-8 z-50 flex flex-col items-center space-y-6 hidden md:flex"
         >
             {/* Top Line */}
-            <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary"></div>
+            <div className="w-0.5 h-20 rounded-full" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 30%, hsl(258 90% 66%) 70%, hsl(195 100% 50%) 100%)' }}></div>
 
             {/* Social Icons */}
             <div className="flex flex-col space-y-4">
@@ -49,7 +48,7 @@ const SocialSidebar = () => {
             </div>
 
             {/* Bottom Line */}
-            <div className="w-px h-16 bg-gradient-to-t from-transparent to-primary"></div>
+            <div className="w-0.5 h-20 rounded-full" style={{ background: 'linear-gradient(to top, transparent 0%, transparent 30%, hsl(258 90% 66%) 70%, hsl(195 100% 50%) 100%)' }}></div>
         </motion.div>
     );
 };

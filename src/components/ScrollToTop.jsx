@@ -33,13 +33,14 @@ const ScrollToTop = () => {
                     exit={{ opacity: 0, scale: 0, y: 20 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     onClick={scrollToTop}
-                    className="fixed bottom-8 right-8 z-[9999] p-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-glow"
+                    className="fixed bottom-8 right-8 z-[9999] p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-glow"
                     style={{
+                        background: 'linear-gradient(135deg, hsl(258 90% 66%), hsl(195 100% 50%))',
                         backdropFilter: 'blur(10px)',
                         border: '1px solid rgba(255, 255, 255, 0.2)'
                     }}
                 >
-                    <ChevronUp className="w-6 h-6" />
+                    <ChevronUp className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                 </motion.button>
             )}
         </AnimatePresence>

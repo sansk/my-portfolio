@@ -130,7 +130,8 @@ const BlogSection = () => {
                         viewport={{ once: true }}
                         whileHover={{ scale: 1.08, rotate: 2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center space-x-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium shadow-md hover:bg-primary/90 transition-colors text-lg hover-glow"
+                        className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-white"
+                        style={{ background: 'linear-gradient(135deg, hsl(258 90% 66%), hsl(195 100% 50%))' }}
                     >
                         <BookOpen className="w-5 h-5 mr-2" />
                         <span>Visit My Blog</span>
