@@ -136,7 +136,10 @@ All colors MUST be HSL.
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 30px hsl(258 90% 66% / 0.3);
+    box-shadow: 
+      0 0 20px hsl(258 90% 66% / 0.4),
+      0 0 40px hsl(195 100% 50% / 0.2),
+      0 0 60px hsl(258 90% 66% / 0.1);
     transition: box-shadow 0.3s ease;
   }
 }

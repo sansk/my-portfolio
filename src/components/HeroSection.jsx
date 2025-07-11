@@ -53,22 +53,20 @@ const ResumeButton = () => (
         transition={{ duration: 0.8, delay: 0.8 }}
     >
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-                size="lg"
-                className="px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg rounded-full hover-glow transition-all duration-300 text-white font-medium shadow-md"
-                style={{ background: 'linear-gradient(135deg, hsl(258 90% 66%), hsl(195 100% 50%))' }}
-                onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = ResumePDF;
-                    link.download = 'Sangeetha-K_Resume.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }}
+            <motion.a
+                href={ResumePDF}
+                download="Sangeetha-K_Resume.pdf"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.08, rotate: 2 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-white bg-primary hover:bg-primary/90"
             >
-                <Download className="w-4 lg:w-5 h-4 lg:h-5 mr-2" />
-                Download CV
-            </Button>
+                <Download className="w-5 h-5 mr-2" />
+                <span>Download CV</span>
+            </motion.a>
         </motion.div>
     </motion.div>
 );

@@ -1,16 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, X, Instagram, Rss, Codepen } from 'lucide-react';
+import { socialLinks } from '@/data/socials';
 
 const SocialSidebar = () => {
-    const socialLinks = [
-        { name: 'Blog', url: 'https://blog.sangeetha-k.dev', icon: Rss },
-        { name: 'GitHub', url: 'https://github.com/sangeetha-k', icon: Github },
-        { name: 'LinkedIn', url: 'https://linkedin.com/in/sangeetha-k', icon: Linkedin },
-        { name: 'CodePen', url: 'https://codepen.io/sangeetha-k', icon: Codepen },
-        { name: 'X', url: 'https://x.com/sangeetha_k', icon: X },
-        { name: 'Instagram', url: 'https://instagram.com/sangeetha.k', icon: Instagram },
-    ];
 
     return (
         <motion.div

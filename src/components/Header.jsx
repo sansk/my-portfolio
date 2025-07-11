@@ -1,8 +1,9 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, Menu, X, Github, Linkedin, Instagram, Rss, Codepen } from 'lucide-react';
+import { Moon, Sun, Menu, X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import SKLogo from "../images/SKLogo.svg";
+import { socialLinks } from '@/data/socials';
 
 const Header = ({ currentSection = 0, onNavigate }) => {
     const { theme, toggleTheme } = useTheme();
@@ -18,14 +19,7 @@ const Header = ({ currentSection = 0, onNavigate }) => {
         { name: 'Contact', index: 4 },
     ];
 
-    const socialLinks = [
-        { name: 'Blog', url: 'https://blog.sangeetha-k.dev', icon: Rss },
-        { name: 'GitHub', url: 'https://github.com/sangeetha-k', icon: Github },
-        { name: 'LinkedIn', url: 'https://linkedin.com/in/sangeetha-k', icon: Linkedin },
-        { name: 'CodePen', url: 'https://codepen.io/sangeetha-k', icon: Codepen },
-        { name: 'X', url: 'https://x.com/sangeetha_k', icon: X },
-        { name: 'Instagram', url: 'https://instagram.com/sangeetha.k', icon: Instagram },
-    ];
+
 
     useLayoutEffect(() => {
         const updateHighlight = () => {
@@ -158,7 +152,7 @@ const Header = ({ currentSection = 0, onNavigate }) => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-border bg-background/95 backdrop-blur-md"
+                        className="md:hidden border-t border-border bg-background/98 backdrop-blur-md"
                     >
                         <div className="px-4 py-4 space-y-2">
                             {menuItems.map((item, index) => (
@@ -167,8 +161,8 @@ const Header = ({ currentSection = 0, onNavigate }) => {
                                     onClick={() => handleMenuClick(index)}
                                     className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                                         currentSection === index && currentSection >= 0
-                                            ? 'bg-gradient-to-r from-primary to-blue-500 text-white shadow-md scale-105 font-semibold'
-                                            : 'hover:bg-primary hover:text-white hover:scale-105 hover:font-semibold text-foreground'
+                                            ? 'bg-gradient-to-r from-primary to-blue-500  shadow-md scale-105 font-semibold'
+                                            : 'hover:bg-primary hover:scale-105 hover:font-semibold text-foreground'
                                     }`}
                                 >
                                     {item.name}

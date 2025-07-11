@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Github, Linkedin, X, Instagram, MapPin, Mail, Phone } from 'lucide-react';
+import { Send, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { socialLinks } from '@/data/socials';
 // import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
@@ -15,12 +16,7 @@ const ContactSection = () => {
     });
     const { toast } = useToast();
 
-    const socialLinks = [
-        { name: 'GitHub', url: 'https://github.com/sangeetha-k', icon: Github },
-        { name: 'LinkedIn', url: 'https://linkedin.com/in/sangeetha-k', icon: Linkedin },
-        { name: 'X', url: 'https://x.com/sangeetha_k', icon: X },
-        { name: 'Instagram', url: 'https://instagram.com/sangeetha.k', icon: Instagram },
-    ];
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
