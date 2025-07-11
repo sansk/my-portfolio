@@ -15,10 +15,9 @@ const HeroHeading = () => (
         transition={{ duration: 0.8, delay: 0.4 }}
         className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold leading-relaxed"
     >
-        <span className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl">Hi There 👋</span>
+        <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">Hi There 👋, I am </span>
         <br />
-        I am <span className="text-gradient">Sangeetha K</span>
-        <br />
+        <span className="text-gradient">Sangeetha K  {" "}</span>
         <span className="text-lg sm:text-xl md:text-2xl lg:text-4xl">aka <span className="text-gradient">SK</span></span>
     </motion.h1>
 );
@@ -62,7 +61,7 @@ const ResumeButton = () => (
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.08, rotate: 2 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-white bg-primary hover:bg-primary/90"
+                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-primary-foreground border-2 border-primary bg-[hsl(var(--primary))]"
             >
                 <Download className="w-5 h-5 mr-2" />
                 <span>Download CV</span>
