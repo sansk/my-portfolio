@@ -4,9 +4,9 @@ import { Send, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { socialLinks } from '@/data/socials';
-// import emailjs from 'emailjs-com';
+import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
     const [formData, setFormData] = useState({
@@ -14,36 +14,31 @@ const ContactSection = () => {
         email: '',
         message: ''
     });
-    const { toast } = useToast();
-
+    const [loading, setLoading] = useState(false);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Send email using emailjs
+        setLoading(true);
+        setFormData({ name: '', email: '', message: '' });
         emailjs.send(
-            'YOUR_SERVICE_ID', // replace with your EmailJS service ID
-            'YOUR_TEMPLATE_ID', // replace with your EmailJS template ID
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
             {
                 from_name: formData.name,
                 from_email: formData.email,
                 message: formData.message,
+                time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
             },
-            'YOUR_USER_ID' // replace with your EmailJS user/public key
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
         )
             .then(() => {
-                toast({
-                    title: "Message sent!",
-                    description: "Thank you for your message. I'll get back to you soon!",
-                });
-                setFormData({ name: '', email: '', message: '' });
+                toast.success("Message sent! Thank you for your message. I'll get back to you soon!");
+                setLoading(false);
             })
             .catch((error) => {
-                toast({
-                    title: "Error",
-                    description: "There was a problem sending your message. Please try again later.",
-                    variant: "destructive",
-                });
+                toast.error("There was a problem sending your message. Please try again later.");
+                setLoading(false);
                 console.error('EmailJS error:', error);
             });
     };
@@ -127,8 +122,8 @@ const ContactSection = () => {
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
-                                    rows={5}
-                                    className="w-full resize-none"
+                                    rows={4}
+                                    className="w-full resize-none overflow-y-auto"
                                 />
                             </motion.div>
 
@@ -140,10 +135,18 @@ const ContactSection = () => {
                             >
                                 <Button
                                     type="submit"
-                                    className="w-full bg-[hsl(var(--primary))] hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-full hover-glow transition-all duration-300"
+                                    className="w-full bg-[hsl(var(--primary))] hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-full hover-glow transition-all duration-300 flex items-center justify-center cursor-pointer active:cursor-pointer"
+                                    disabled={loading}
                                 >
-                                    <Send className="w-4 h-4 mr-2" />
-                                    Send Message
+                                    {loading ? (
+                                        <svg className="animate-spin h-4 w-4 mr-2" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                                        </svg>
+                                    ) : (
+                                        <Send className="w-4 h-4 mr-2" />
+                                    )}
+                                    {loading ? 'Sending...' : 'Send Message'}
                                 </Button>
                             </motion.div>
                         </form>
@@ -181,20 +184,26 @@ const ContactSection = () => {
                             </div>
                         </div>
                         {/* Location Box */}
-                        <div className="glass-card p-6 rounded-2xl flex items-start justify-start">
-                            <MapPin className="w-5 h-5 text-primary mr-2" />
-                            <span className="text-base text-foreground">Chennai, India</span>
+                        <div className="glass-card p-6 rounded-2xl flex items-center justify-start">
+                            <span className="w-12 h-12 glass-card rounded-full flex items-center justify-center hover-glow transition-all duration-300 mr-3" title="Location">
+                                <MapPin className="w-5 h-5 text-primary" />
+                            </span>
+                            <span className="text-base text-foreground">Bengaluru, India</span>
                         </div>
                         {/* Email Box */}
-                        <div className="glass-card p-6 rounded-2xl flex items-start justify-start">
-                            <Mail className="w-5 h-5 text-primary mr-2" />
-                            <span className="text-base text-foreground">sangeetha@email.com</span>
+                        <div className="glass-card p-6 rounded-2xl flex items-center justify-start">
+                            <span className="w-12 h-12 glass-card rounded-full flex items-center justify-center hover-glow transition-all duration-300 mr-3" title="Email">
+                                <Mail className="w-5 h-5 text-primary" />
+                            </span>
+                            <span className="text-base text-foreground">sangeetha.csk@gmail.com</span>
                         </div>
-                        {/* Phone Box */}
+                        {/* Phone Box
                         <div className="glass-card p-6 rounded-2xl flex items-start justify-start">
-                            <Phone className="w-5 h-5 text-primary mr-2" />
+                            <span className="w-12 h-12 glass-card rounded-full flex items-center justify-center hover-glow transition-all duration-300 mr-3" title="Phone">
+                                <Phone className="w-5 h-5 text-primary" />
+                            </span>
                             <span className="text-base text-foreground">+91 98765 43210</span>
-                        </div>
+                        </div> */}
                     </motion.div>
                 </div>
             </div>
