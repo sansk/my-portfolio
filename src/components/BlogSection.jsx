@@ -1,52 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, ArrowRight, Github, BookOpen, ExternalLink } from 'lucide-react';
 
-const BlogSection = () => {
-    const blogPosts = [
-        {
-            id: 1,
-            title: 'Getting Started with React 18',
-            image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop',
-            date: '2024-01-15',
-            link: '#'
-        },
-        {
-            id: 2,
-            title: 'Building Scalable APIs',
-            image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=250&fit=crop',
-            date: '2024-01-10',
-            link: '#'
-        },
-        {
-            id: 3,
-            title: 'CSS Grid vs Flexbox',
-            image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop',
-            date: '2024-01-05',
-            link: '#'
-        },
-        {
-            id: 4,
-            title: 'TypeScript Advanced Types',
-            image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=250&fit=crop',
-            date: '2024-01-01',
-            link: '#'
-        },
-        {
-            id: 5,
-            title: 'Performance Optimization',
-            image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=250&fit=crop',
-            date: '2023-12-28',
-            link: '#'
-        },
-        {
-            id: 6,
-            title: 'State Management Solutions',
-            image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop',
-            date: '2023-12-25',
-            link: '#'
+const HASHNODE_PUBLICATION_ID = import.meta.env.VITE_HASHNODE_PUBLICATION_ID;
+
+async function fetchHashnodePosts(publicationId) {
+    const query = `
+      query Publication($id: ObjectId!) {
+        publication(id: $id) {
+          posts(first: 6) {
+            edges {
+              node {
+                cuid
+                title
+                brief
+                slug
+                coverImage {
+                  url
+                }
+                publishedAt
+                url
+              }
+            }
+          }
         }
-    ];
+      }
+    `;
+    const response = await fetch('https://gql.hashnode.com/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, variables: { id: publicationId } })
+    });
+    const { data } = await response.json();
+    return data?.publication?.posts?.edges?.map(edge => edge.node) || [];
+}
+
+const BlogSection = () => {
+    const [blogPosts, setBlogPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchHashnodePosts(HASHNODE_PUBLICATION_ID)
+            .then(posts => {
+                setBlogPosts(posts);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError('Failed to load blog posts.');
+                setLoading(false);
+            });
+    }, []);
 
     return (
         <section className="min-h-screen flex items-center justify-center py-20 gradient-bg scroll-mt-24">
@@ -63,59 +67,59 @@ const BlogSection = () => {
                     </h2>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {blogPosts.map((post, index) => (
-                        <motion.article
-                            key={post.id}
-                            initial={{ opacity: 0, y: 50, rotateY: -15 }}
-                            whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -5, rotateY: 5, scale: 1.02 }}
-                            className="group relative glass-card rounded-xl overflow-hidden hover-glow cursor-pointer"
-                            style={{ transformStyle: 'preserve-3d' }}
-                        >
-                            {/* Blog Image */}
-                            <div className="relative overflow-hidden">
-                                <motion.img
-                                    src={post.image}
-                                    alt={post.title}
-                                    className="w-full h-48 object-cover"
-                                    whileHover={{ scale: 1.1 }}
-                                    transition={{ duration: 0.3 }}
-                                />
-
-                                {/* Read More Button Overlay */}
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    whileHover={{ opacity: 1 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="absolute inset-0 bg-black/60 flex items-center justify-center"
-                                >
-                                    <motion.button
-                                        whileHover={{ scale: 1.1, rotate: 5 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        className="p-3 bg-white/20 rounded-full backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-colors"
-                                    >
-                                        <ExternalLink className="w-6 h-6 text-white" />
-                                    </motion.button>
-                                </motion.div>
-                            </div>
-
-                            {/* Blog Content */}
-                            <div className="p-6">
-                                <div className="flex items-center text-sm text-muted-foreground mb-3">
-                                    <Calendar className="w-4 h-4 mr-2" />
-                                    <time>{new Date(post.date).toLocaleDateString()}</time>
+                {loading ? (
+                    <div className="text-center text-lg text-muted-foreground py-12">Loading blog posts...</div>
+                ) : error ? (
+                    <div className="text-center text-lg text-red-500 py-12">{error}</div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {blogPosts.map((post, index) => (
+                            <motion.article
+                                key={post.cuid || post.slug || post.url || index}
+                                initial={{ opacity: 0, y: 50, rotateY: -15 }}
+                                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                                transition={{ duration: 0.6, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                whileHover={{ y: -5, rotateY: 5, scale: 1.02 }}
+                                className="group relative glass-card rounded-xl overflow-hidden hover-glow cursor-pointer flex flex-col"
+                                style={{ transformStyle: 'preserve-3d' }}
+                            >
+                                {/* Blog Image */}
+                                <div className="relative overflow-hidden">
+                                    <motion.img
+                                        src={post.coverImage?.url || 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop'}
+                                        alt={post.title}
+                                        className="w-full h-48 object-cover"
+                                        whileHover={{ scale: 1.1 }}
+                                        transition={{ duration: 0.3 }}
+                                    />
                                 </div>
 
-                                <h3 className="text-lg font-bold text-gradient group-hover:text-primary transition-colors">
-                                    {post.title}
-                                </h3>
-                            </div>
-                        </motion.article>
-                    ))}
-                </div>
+                                {/* Blog Content */}
+                                <div className="p-6 flex flex-col flex-1">
+                                    <h3 className="text-lg font-bold text-gradient group-hover:text-primary transition-colors text-center">
+                                        {post.title}
+                                    </h3>
+                                    <div className="mt-auto flex items-center text-sm text-muted-foreground justify-between pt-4">
+                                        <span className="flex items-center">
+                                            <Calendar className="w-4 h-4 mr-2" />
+                                            <time>{new Date(post.publishedAt).toLocaleDateString()}</time>
+                                        </span>
+                                        <a
+                                            href={post.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold border border-primary/20 hover:bg-primary/20 transition-colors ml-2"
+                                        >
+                                            Read
+                                            <ArrowRight className="w-4 h-4 ml-1" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </motion.article>
+                        ))}
+                    </div>
+                )}
 
                 {/* Visit My Blog Button */}
                 <div className="mt-12 flex justify-center">
