@@ -39,7 +39,9 @@ const ProjectsSection = () => {
                     image: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`,
                     github: repo.html_url,
                     live: repo.homepage,
-                    techStack: [repo.language].filter(Boolean),
+                    techStack: (repo.topics || []).filter(topic => topic.toLowerCase() !== TOPIC_FILTER?.toLowerCase()).map(topic => 
+                        topic.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                    ),
                     stars: repo.stargazers_count,
                     forks: repo.forks_count,
                     updatedAt: repo.updated_at,
@@ -84,7 +86,9 @@ const ProjectsSection = () => {
                     image: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`,
                     github: repo.html_url,
                     live: repo.homepage,
-                    techStack: [repo.language].filter(Boolean),
+                    techStack: (repo.topics || []).filter(topic => topic.toLowerCase() !== TOPIC_FILTER?.toLowerCase()).map(topic => 
+                        topic.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                    ),
                     stars: repo.stargazers_count,
                     forks: repo.forks_count,
                     updatedAt: repo.updated_at,
