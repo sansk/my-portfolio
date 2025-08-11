@@ -76,21 +76,22 @@ const AboutSection = () => {
                 className="space-y-4 text-lg text-muted-foreground"
               >
                 <p>
-                  I'm a passionate full-stack developer with over 5 years of
-                  experience creating digital experiences that make a
-                  difference. My journey in tech began with a curiosity for how
-                  things work, which evolved into a love for building solutions.
+                  I’m a passionate Full-Stack Developer with 8+ years of
+                  experience and a strong focus on front-end engineering for the
+                  past 4+ years. I specialize in creating scalable,
+                  production-grade applications using JavaScript (ES6+),
+                  React.js, Node.js, and PostgreSQL.
                 </p>
                 <p>
-                  Specializing in modern web technologies, I focus on creating
-                  scalable, user-friendly applications that solve real-world
-                  problems. When I'm not coding, you'll find me sharing
-                  knowledge through content creation and mentoring.
+                  My journey in tech began with a curiosity for how things work,
+                  which evolved into a love for building solutions. Specializing
+                  in modern web technologies, I focus on creating scalable,
+                  user-friendly applications that solve real-world problems.
                 </p>
                 <p>
-                  I believe in continuous learning and staying updated with the
-                  latest industry trends to deliver cutting-edge solutions that
-                  exceed expectations.
+                  When I’m not coding, you’ll find me creating content and
+                  sharing knowledge, and exploring new tech trends to stay ahead
+                  in this ever-evolving field.
                 </p>
               </motion.div>
             </div>
