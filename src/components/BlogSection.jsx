@@ -124,7 +124,7 @@ const BlogSection = () => {
                 {/* Visit My Blog Button */}
                 <div className="mt-12 flex justify-center">
                     <motion.a
-                        href="https://blog.sangeetha-k.dev"
+                        href="https://blog.theintrovertcoder.in/"
                         target="_blank"
                         rel="noopener noreferrer"
                         initial={{ opacity: 0, y: 40 }}
