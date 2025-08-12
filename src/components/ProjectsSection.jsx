@@ -290,7 +290,7 @@ const ProjectsSection = () => {
         {/* Visit GitHub Button */}
         <div className="mt-12 flex justify-center">
           <motion.a
-            href={`https://github.com/${GITHUB_USERNAME}?tab=repositories&q=topic%3A${TOPIC_FILTER}`}
+            href={`https://github.com/${GITHUB_USERNAME}`}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 40 }}
