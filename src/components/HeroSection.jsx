@@ -120,6 +120,7 @@ const HeroSection = () => {
           <HeroHeading />
           <HeroSubtitle />
           <ResumeButton />
+          <BlogButton />
         </motion.div>
         {/* Right: Profile Image & Floating Icons */}
         <motion.div
