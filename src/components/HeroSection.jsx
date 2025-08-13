@@ -73,6 +73,21 @@ const ResumeButton = () => (
         <Download className="w-5 h-5 mr-2" />
         <span>Resume</span>
       </motion.a>
+
+       <motion.a
+        href="https://www.theintrovertcoder.in/"
+        target="_blank"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.08, rotate: 2 }}
+        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-primary-foreground border-2 border-primary bg-[hsl(var(--primary))]"
+      > 
+        <Rss className="w-5 h-5 mr-2"/>
+        <span>Reac My Blog</span>
+      </motion.a>
     </motion.div>
   </motion.div>
 );
@@ -120,7 +135,6 @@ const HeroSection = () => {
           <HeroHeading />
           <HeroSubtitle />
           <ResumeButton />
-          <BlogButton />
         </motion.div>
         {/* Right: Profile Image & Floating Icons */}
         <motion.div
