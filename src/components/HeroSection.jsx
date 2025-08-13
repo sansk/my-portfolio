@@ -51,7 +51,7 @@ const HeroSubtitle = () => (
   </motion.div>
 );
 
-// --- Resume Button Block ---
+// --- Resume Button & Blog Button ---
 const ResumeButton = () => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -86,7 +86,7 @@ const ResumeButton = () => (
         className="inline-flex items-center space-x-2 px-6 py-3 rounded-full font-medium shadow-md transition-all duration-300 text-lg hover-glow text-primary-foreground border-2 border-primary bg-[hsl(var(--primary))]"
       > 
         <Rss className="w-5 h-5 mr-2"/>
-        <span>Reac My Blog</span>
+        <span>My Blog</span>
       </motion.a>
     </motion.div>
   </motion.div>
